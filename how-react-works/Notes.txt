@@ -1,0 +1,120 @@
+
+Part 1 : How Rendering Works: The Render Phase
+
+1. How renders are actually performed in the render phase.
+
+2. At the beginning of render phase react will go through the entire component take all the component instances that triggered a re-render and actually render them
+
+3. Which simply means to call the corresponding component functions that we have written in our code.
+
+4. This will create updated React elements which altogether make up the so-called virtual DOM.
+
+Summary : Read Triggers => Re-Render => Function Call => Virtual Dom.
+
+THE VIRTUAL DOM (REACT ELEMENT TREE)
+
+1. On the initial render, React will take the entire component tree and transform it into one big React element which will
+basically be a React element tree like this one. This is called Virtual Dom.
+
+2. Virtual Dom: Tree of all react elements created from all instances in the component tree.
+
+3. Cheap and fast to create multiple trees, like this, even if we need many iterations of it because in the end it's just a JavaScript object.
+
+Dummy Developers : Most Hyped what React is and how it works😄 
+
+4. The official document removes virtual dom because it just sounds a bit nicer than React element tree.
+
+5. When state is update then react will create a new react element tree 
+
+6. Rendering a component will cause all of its child components to be rendered as well (no matter if props changed or not)
+
+7. Necessary because React doesn’t know whether children will be affected 
+
+8. Also, keep in mind once again that this does not mean that the entire DOM is updated It's just a virtual DOM that will be recreated
+
+Part 2 : How Rendering Works: The Render Phase
+
+1. So what happens next is that this new virtual DOM that was created after the state update will get reconciled with the current so-called Fiber tree as it exists before the state update.
+
+Note: In React, "reconciliation" refers to the process where React updates the DOM by comparing the previous and current states of the UI (Virtual DOM). It determines what changes need to be made to reflect the updated UI efficiently.
+
+2. Then the results of this reconciliation process is gonna be an updated Fiber tree, so a tree that will eventually be used to write to the DOM. this is high level overview of of the inputs and the outputs of reconciliation,
+
+What reconciliation is and How it works & Why we need it?
+
+1. So, you might be wondering why do we even need stuff like the virtual DOM, a reconciler and those Fiber trees? Why not simply update the entire DOM
+
+Answer : Cheap & Fast at JS object & Cheap & Slow at Writing DOM.
+
+2. React reuses as much of the existing DOM as possible it leads to question how? react will do that 
+
+3. Reconciliation: Deciding which DOM elements actually need to be inserted, deleted, or updated, in order to reflect the latest state changes.
+
+4. Now, reconciliation is processed by a reconciler and we can say that the reconciler really is the engine of React It's like the heart of React.
+
+5. So it's this reconciler that allows us to never touch the DOM directly and instead simply tell React what the next snapshot
+of the UI should look like based on state.
+
+6. And as I mentioned before, the current reconciler in React is called Fiber, and this is how it works.
+
+
+The Reconciler: Fiber 
+
+1. Fiber tree: internal tree that has a “fiber” for each component instance and DOM element.
+
+2. Fibers are NOT re-created on every render it is a it's simply mutated over and over again in future reconciliation steps.
+
+3. And this makes Fibers the perfect place for keeping track of things like the current component state, props, side effects, list of used hooks and more.
+
+4. So the actual state and props of any component instance that we see on the screen are internally stored inside the corresponding Fiber in the Fiber tree.
+
+5. Now, each Fiber also contains a queue of work to do like updating state, updating refs, etc..
+
+6. This is why a Fiber is also defined as a unit of work Now, if we take a quick look at the Fiber tree we will see that the Fibers are arranged in a different way than the elements in the React element tree.
+
+7. So instead of a normal parent-child relationship, each first child has a link to its parent and all the other children then have a link to their previous sibling And this kind of structure is called a linked list and it makes it easier for React to process the work that is associated with each Fiber. We also see that both trees include not only React elements or components, but also regular DOM elements,
+
+8. So both trees really are a complete representation of the entire DOM structure, not just of React components. Now going back to the idea that Fibers are units of work, one extremely important characteristic of the Fiber reconciler is that work can be performed asynchronously.
+
+9. Rendering process can be split into “Unit of work” chunks, tasks can be prioritized, and work can be paused, reused, or thrown away. Enables concurrent features like Suspense or transitions , Long renders won’t block JS engine can be problematic in large applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

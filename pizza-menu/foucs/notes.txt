@@ -1,0 +1,10 @@
+How do you give access to componet of another component objects.
+
+1. The answer is pretty simple using props.
+
+
+React Fragement 
+
+1. If you want to render two elements then you need to use react fragement. 
+
+2. Sometimes you need to key in react, using React.Fragement component.

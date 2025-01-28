@@ -1,0 +1,8 @@
+Programmatic Navigation with <Navigate />
+
+1. but there is also a declarative way of doing that.
+2. Navigate component is not so much used anymore.
+3. but there is still one very important use case for it, which is inside nested routes.
+4. it like a redirect.
+
+
