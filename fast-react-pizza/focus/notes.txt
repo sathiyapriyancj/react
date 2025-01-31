@@ -1,0 +1,3 @@
+Color Text Classes 
+
+1. text-colour_name-tickness.
